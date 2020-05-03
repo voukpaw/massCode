@@ -68,7 +68,7 @@ ipcMain.on('message', (e, options) => {
   dialog.showMessageBox(BrowserWindow.getFocusedWindow(), options)
 })
 
-// Переключение чекбокса у Editor/Preview Markdown
+// Switch checkbox at Editor/Preview Markdown
 ipcMain.on('menu:markdown-preview', (e, value) => {
   menu.items[3].submenu.items[2].checked = value
 })

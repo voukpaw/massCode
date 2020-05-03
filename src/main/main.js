@@ -23,7 +23,7 @@ function createMainWindow () {
     title: 'massCode',
     useContentSize: true,
     titleBarStyle: 'hidden',
-    // Убираем хайлайт вокруг приложения на Mac
+    // Remove highlight around the application on Mac
     transparent: process.platform === 'darwin',
     backgroundColor,
     webPreferences: {

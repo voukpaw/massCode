@@ -234,8 +234,8 @@ export default {
       const folderId = rootGetters['folders/selectedId']
       const defaultQuery = { folderId: { $in: ids } }
       const query = defaultLibraryQuery(defaultQuery, folderId)
-      // Перемещаем все сниппеты из удаленной папки,
-      // включая вложенные сниппеты в подпапках, в корзину
+      // We move all the snippets from the remote folder,
+      // including the nested snippets in the subfolders, to the trash
       db.snippets.update(
         { folderId: { $in: ids } },
         { $set: { isDeleted: true } },
@@ -245,7 +245,7 @@ export default {
           dispatch('snippets/getSnippets', query, { root: true })
         }
       )
-      // Удаляем папку, включая все подпапки
+      // Delete the folder, including all subfolders
       db.masscode.findOne({ _id: 'folders' }, (err, doc) => {
         if (err) return
 

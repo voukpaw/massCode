@@ -185,7 +185,7 @@ export default {
       const folders = await getFolders()
       const tags = await getTags()
 
-      // Добавляем связь folder
+      // Add a folder link
       snippets.map(snippet => {
         function findFolderById (folders, id) {
           folders.forEach(i => {
@@ -202,7 +202,7 @@ export default {
         return snippet
       })
 
-      // Добавляем связь tags
+      //Add link tags
       snippets.map(snippet => {
         snippet.tagsPopulated = []
         snippet.tags.forEach(tagId => {
@@ -226,7 +226,7 @@ export default {
           .limit(limit)
           .exec((err, snippets) => {
             if (err) return
-            // Добавляем связь folder по его id у snippet
+            // Add a folder link by its id at snippet
             db.masscode.findOne({ _id: 'folders' }, (err, doc) => {
               if (err) return
 

@@ -62,27 +62,27 @@ export default {
     removeTag ({ state, commit, dispatch, rootGetters }, id) {
       db.snippets.find({ tags: { $elemMatch: id } }, (err, doc) => {
         if (err) return
-        // Собираем ids
+        // Collect IDs
         if (doc) {
           const ids = doc.reduce((acc, item) => {
             acc.push(item._id)
             return acc
           }, [])
-          // Удаляем тег у всех найденных сниппетов с этим тегом
+          // Remove tag from all found snippets with this tag
           db.snippets.update(
             { _id: { $in: ids } },
             { $pull: { tags: id } },
             { multi: true },
             (err, doc) => {
               if (err) return
-              // Удаляем сам тег
+              // Delete the tag itself
               db.tags.remove({ _id: id }, async (err, doc) => {
                 if (err) return
-                // Получаем обновленный список тегов
+                // Get the updated tag list
                 const tags = await dispatch('getTags')
                 const firstTag = tags[0]
-                // Если есть первый тег, то устанавливаем его как выбранный,
-                // затем получаем список снипеттов по тегу
+                // If there is a first tag, then set it as the selected one,
+                // then get a list of snippets by tag
                 if (firstTag) {
                   commit('SET_SELECTED_ID', firstTag._id)
                   await dispatch(
@@ -91,7 +91,7 @@ export default {
                     { root: true }
                   )
                 } else {
-                  // Если нет, то переключаем на библиотеку
+                  // If not, then switch to the library
                   dispatch('app/setShowTags', false, { root: true })
                 }
               })

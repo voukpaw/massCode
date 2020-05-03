@@ -120,7 +120,7 @@ export default {
 
   methods: {
     async init () {
-      // Загружаем последние изменения БД
+      // Download the latest database changes
       db.updatePath()
 
       await this.$store.dispatch('snippets/getLatestSnippets')
@@ -134,7 +134,7 @@ export default {
       this.getViewportHeight()
     },
     async onSelect (snippet) {
-      // Пока что выбирает только контент из первого фрагмента
+      // So far, only selects content from the first fragment
       const content = snippet.content[0].value
       await navigator.clipboard.writeText(content)
       if (process.platform === 'darwin' || process.platform === 'linux') {
