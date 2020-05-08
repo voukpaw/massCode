@@ -202,7 +202,7 @@ export default {
         return snippet
       })
 
-      //Add link tags
+      // Add link tags
       snippets.map(snippet => {
         snippet.tagsPopulated = []
         snippet.tags.forEach(tagId => {
